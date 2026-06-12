@@ -1,10 +1,8 @@
 using System;
-using UnityEditor.Toolbars;
 using UnityEditor.UIElements;
-using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Window_Elements
+namespace Dialogue_System.Scripts.Window_Elements
 {
     public class DropdownMenu
     {

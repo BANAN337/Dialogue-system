@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement name="VisualElement" style="flex-grow: 1;">
+        <uie:Toolbar style="height: 31px;">
+            <uie:ToolbarButton text="Save" name="SaveButton" style="width: 96px;"/>
+            <uie:ObjectField label="Graph To Load" name="GraphToLoad" style="align-items: stretch; align-self: stretch; flex-shrink: 0; align-content: flex-start; justify-content: flex-start;"/>
+            <uie:ToolbarMenu text="Add Node" name="AddNode" style="width: 83px; align-items: stretch;"/>
+        </uie:Toolbar>
+    </ui:VisualElement>
+</ui:UXML>
