@@ -1,9 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
-    <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-shrink: 1;">
+    <Style src="project://database/Assets/Dialogue%20System/USS/GraphToLoad.uss?fileID=7433441132597879392&amp;guid=566ec07a599903d40b99893d3780d392&amp;type=3#GraphToLoad"/>
+    <ui:VisualElement name="MainElement" style="flex-grow: 1; flex-shrink: 1;">
         <uie:Toolbar style="height: 31px;">
-            <uie:ToolbarButton text="Save" name="SaveButton" style="width: 57%; flex-shrink: 1; flex-grow: 1;"/>
-            <uie:ObjectField label="Graph To Load" name="GraphToLoad" style="align-items: stretch; align-self: stretch; flex-shrink: 0; --unity-property-field-label-width: 80px; align-content: flex-start; justify-content: flex-start; flex-grow: 1; width: 20%;"/>
-            <uie:ToolbarMenu text="Add Node" name="AddNode" style="width: 407%; align-items: stretch;"/>
+            <uie:ToolbarButton text="Save" name="SaveButton" style="width: 57%; flex-shrink: 2; flex-grow: 1;"/>
+            <uie:ObjectField label="Graph To Load" name="GraphToLoad" picking-mode="Position" style="align-items: stretch; align-self: stretch; flex-shrink: 1; align-content: flex-start; justify-content: flex-start; flex-grow: 1; width: 28%; aspect-ratio: auto; margin-right: 3px;"/>
+            <uie:ToolbarMenu text="Add Node" name="AddNode" style="width: 407%; align-items: stretch; flex-shrink: 2;"/>
         </uie:Toolbar>
     </ui:VisualElement>
 </ui:UXML>

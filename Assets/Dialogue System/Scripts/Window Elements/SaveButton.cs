@@ -26,10 +26,9 @@ namespace Dialogue_System.Scripts.Window_Elements
         {
             var path = EditorUtility.SaveFilePanel("Save Dialogue Graph", Application.dataPath, "DialogueGraph", "txt");
             Debug.Log(path);
-            if (string.IsNullOrEmpty(path))
-            {
-                return;
-            }
+            
+            if (string.IsNullOrEmpty(path)) return;
+            
             File.WriteAllText(path, "sdfhhsd");
             AssetDatabase.Refresh();
         }
