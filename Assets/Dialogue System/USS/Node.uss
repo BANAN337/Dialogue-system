@@ -1,0 +1,6 @@
+#Background {
+    --line-color: rgb(60, 60, 60);
+    --thick-line-color: rgb(100, 100, 100);
+    --grid-background-color: rgb(30, 30, 30);
+    --spacing: 100;
+}

@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 namespace Dialogue_System.Scripts.Window_Elements
 {
-    public sealed class SaveButton : ToolbarElement
+    public sealed class SaveButton : WindowElement
     {
         public override string ElementName => "SaveButton";
         private readonly ToolbarButton _saveButton;

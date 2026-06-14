@@ -19,13 +19,16 @@ namespace Dialogue_System.Scripts.Window_Elements
 
         private void CreateGUI()
         {
+            SetupElements();
+        }
+
+        private void SetupElements()
+        {
             tree.CloneTree(rootVisualElement);
-            var mainElement = rootVisualElement.Q<VisualElement>("MainElement");
+            var toolbar = new ToolbarElement(rootVisualElement);
+            var graphView = new GraphElement(rootVisualElement);
             var saveButton = new SaveButton(rootVisualElement);
-            var nodeGraph = new NodeGraph(mainElement);
-            mainElement.Add(nodeGraph);
-            nodeGraph.StretchToParentSize();
-            rootVisualElement.Add(nodeGraph);
+            var addNode = new AddNodeMenu(rootVisualElement, graphView.Graph);
         }
     }
 }
