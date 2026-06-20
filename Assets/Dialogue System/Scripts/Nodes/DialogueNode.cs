@@ -6,6 +6,8 @@ namespace Dialogue_System.Scripts.Nodes
 {
     public class DialogueNode : BaseNode
     {
+        public Port inputPort;
+        
         public DialogueNode()
         {
             SetupDialogueNode();
@@ -16,8 +18,11 @@ namespace Dialogue_System.Scripts.Nodes
             var textField = new TextField("Dialogue Text");
             mainContainer.Add(textField);
 
-            var inputPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(float));
-            var outputPort = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(float));
+            inputPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(float));
+            inputPort.portName = "Input";
+            
+            var outputPort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(float));
+            outputPort.portName = "Output";
             
             inputContainer.Add(inputPort);
             outputContainer.Add(outputPort);

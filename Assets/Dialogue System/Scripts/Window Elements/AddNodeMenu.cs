@@ -25,7 +25,7 @@ namespace Dialogue_System.Scripts.Window_Elements
             _toolbarMenu.menu.AppendAction("Dialogue Node", _ =>
             {
                 var dialogueNode = new DialogueNode();
-                _graphView.Insert(1, dialogueNode);
+                _graphView.AddElement(dialogueNode);
             });
         }
     }
