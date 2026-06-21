@@ -1,32 +1,31 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Dialogue_System.Scripts.Nodes
 {
-    public class DialogueNode : BaseNode
+    public class StartingNode : BaseNode
     {
-        public DialogueNode()
+        public static StartingNode Instance { get; private set; } 
+        
+        public StartingNode()
         {
+            if(Instance != null) return;
+            Instance = this;
+            
             SetupNode();
         }
 
-        protected override void SetupNode()
+        protected sealed override void SetupNode()
         {
-            var textField = new TextField("Dialogue Text");
-            mainContainer.Add(textField);
-
-            var inputPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(float));
-            inputPort.portName = "Input";
+            title = "Starting Node";
             
             var outputPort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(float));
             outputPort.portName = "Output";
             
-            inputContainer.Add(inputPort);
             outputContainer.Add(outputPort);
             
             SetPosition(Rect.zero);
-
+            
             RefreshNode();
         }
     }

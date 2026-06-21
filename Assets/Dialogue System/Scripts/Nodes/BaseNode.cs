@@ -8,5 +8,13 @@ namespace Dialogue_System.Scripts.Nodes
     public abstract class BaseNode : Node
     {
         public List<string> DialogueLines = new();
+
+        protected abstract void SetupNode();
+        
+        protected void RefreshNode()
+        {
+            RefreshExpandedState();
+            RefreshPorts();
+        }
     }
 }
