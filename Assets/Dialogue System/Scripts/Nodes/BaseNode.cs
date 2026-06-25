@@ -11,9 +11,6 @@ namespace Dialogue_System.Scripts.Nodes
     public abstract class BaseNode : Node
     {
         public List<string> DialogueLines = new();
-<<<<<<< Updated upstream
-=======
-        
         protected BaseNode()
         {
             var nodeManager = NodeManager.Instance;
@@ -33,6 +30,6 @@ namespace Dialogue_System.Scripts.Nodes
             NodeManager.Instance.Nodes.Remove(this);
         }
         protected abstract void SetupNode();
->>>>>>> Stashed changes
+
     }
 }

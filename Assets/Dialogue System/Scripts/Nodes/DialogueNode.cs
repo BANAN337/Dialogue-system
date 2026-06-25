@@ -6,21 +6,19 @@ namespace Dialogue_System.Scripts.Nodes
 {
     public class DialogueNode : BaseNode
     {
-        public Port inputPort;
-        
         public DialogueNode()
         {
-            SetupDialogueNode();
+            SetupNode();
         }
 
-        private void SetupDialogueNode()
+        protected override void SetupNode()
         {
             name = "Dialogue Node";
             
             var textField = new TextField("Dialogue Text");
             mainContainer.Add(textField);
 
-            inputPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(float));
+            var inputPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(float));
             inputPort.portName = "Input";
             
             var outputPort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(float));
@@ -30,9 +28,8 @@ namespace Dialogue_System.Scripts.Nodes
             outputContainer.Add(outputPort);
             
             SetPosition(Rect.zero);
-            
-            RefreshExpandedState();
-            RefreshPorts();
+
+            RefreshNode();
         }
     }
 }
