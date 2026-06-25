@@ -28,18 +28,16 @@ namespace Dialogue_System.Scripts.Window_Elements
             tree.CloneTree(rootVisualElement);
             var toolbar = new ToolbarElement(rootVisualElement);
             var graphView = new GraphElement(rootVisualElement);
-            var saveButton = new SaveButton(rootVisualElement);
-            var addNode = new AddNodeMenu(rootVisualElement, graphView.Graph);
             var nodeManager = new NodeManager(graphView.Graph);
             var saveButton = new SaveButton(rootVisualElement);
             var addNode = new AddNodeMenu(rootVisualElement);
+            var startingNode = new StartingNode();
+
             CreateStartingNode();
         }
 
         private void CreateStartingNode()
         {   
-            var startingNode = new StartingNode();
-            NodeManager.Instance.GraphView.AddElement(startingNode);
         }
     }
 }
