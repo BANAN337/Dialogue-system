@@ -15,6 +15,8 @@ namespace Dialogue_System.Scripts.Nodes
 
         private void SetupDialogueNode()
         {
+            name = "Dialogue Node";
+            
             var textField = new TextField("Dialogue Text");
             mainContainer.Add(textField);
 

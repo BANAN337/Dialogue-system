@@ -1,6 +1,10 @@
+<<<<<<< Updated upstream
 using System;
+=======
+using Dialogue_System.Scripts.Managers;
+using Dialogue_System.Scripts.Nodes;
+>>>>>>> Stashed changes
 using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -27,8 +31,21 @@ namespace Dialogue_System.Scripts.Window_Elements
             tree.CloneTree(rootVisualElement);
             var toolbar = new ToolbarElement(rootVisualElement);
             var graphView = new GraphElement(rootVisualElement);
+<<<<<<< Updated upstream
             var saveButton = new SaveButton(rootVisualElement);
             var addNode = new AddNodeMenu(rootVisualElement, graphView.Graph);
+=======
+            var nodeManager = new NodeManager(graphView.Graph);
+            var saveButton = new SaveButton(rootVisualElement);
+            var addNode = new AddNodeMenu(rootVisualElement);
+            CreateStartingNode();
+        }
+
+        private void CreateStartingNode()
+        {   
+            var startingNode = new StartingNode();
+            NodeManager.Instance.GraphView.AddElement(startingNode);
+>>>>>>> Stashed changes
         }
     }
 }
