@@ -1,3 +1,5 @@
+using Dialogue_System.Scripts.Interfaces;
+using Unity.GraphToolkit.Editor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -7,7 +9,7 @@ namespace Dialogue_System.Scripts.Nodes
     {
         public static StartingNode Instance { get; private set; } 
         
-        public StartingNode()
+        public StartingNode(INodeSaver nodeSaver) : base(nodeSaver)
         {
             if(Instance != null) return;
             Instance = this;

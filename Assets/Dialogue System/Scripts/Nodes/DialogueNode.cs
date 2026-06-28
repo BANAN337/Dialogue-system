@@ -1,3 +1,4 @@
+using Dialogue_System.Scripts.Interfaces;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -6,7 +7,7 @@ namespace Dialogue_System.Scripts.Nodes
 {
     public class DialogueNode : BaseNode
     {
-        public DialogueNode()
+        public DialogueNode(INodeSaver nodeSaver) : base(nodeSaver)
         {
             SetupNode();
         }

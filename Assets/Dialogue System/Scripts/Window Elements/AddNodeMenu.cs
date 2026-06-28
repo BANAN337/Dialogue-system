@@ -1,4 +1,6 @@
+using Dialogue_System.Scripts.Interfaces;
 using Dialogue_System.Scripts.Managers;
+using Dialogue_System.Scripts.Node_Utility;
 using Dialogue_System.Scripts.Nodes;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
@@ -12,9 +14,11 @@ namespace Dialogue_System.Scripts.Window_Elements
         public override string ElementName => "AddNode";
         
         private readonly ToolbarMenu _toolbarMenu;
+        private NodeCreator _nodeCreator;
         
-        public AddNodeMenu(VisualElement elementContainer) : base(elementContainer)
+        public AddNodeMenu(VisualElement elementContainer, NodeCreator nodeCreator) : base(elementContainer)
         {
+            _nodeCreator = nodeCreator;
             _toolbarMenu = elementContainer.Q<ToolbarMenu>(ElementName);
             ConfigureElement();
         }
@@ -23,7 +27,7 @@ namespace Dialogue_System.Scripts.Window_Elements
         {
             _toolbarMenu.menu.AppendAction("Dialogue Node", _ =>
             {
-                var dialogueNode = new DialogueNode();
+                var dialogueNode = _nodeCreator.CreateDialogueNode();
             });
         }
     }

@@ -1,5 +1,6 @@
 using System;
 using Dialogue_System.Scripts.Managers;
+using Dialogue_System.Scripts.Node_Utility;
 using Dialogue_System.Scripts.Nodes;
 using UnityEditor;
 using UnityEngine;
@@ -28,16 +29,14 @@ namespace Dialogue_System.Scripts.Window_Elements
             tree.CloneTree(rootVisualElement);
             var toolbar = new ToolbarElement(rootVisualElement);
             var graphView = new GraphElement(rootVisualElement);
-            var nodeManager = new NodeManager(graphView.Graph);
             var saveButton = new SaveButton(rootVisualElement);
-            var addNode = new AddNodeMenu(rootVisualElement);
-            var startingNode = new StartingNode();
-
-            CreateStartingNode();
-        }
-
-        private void CreateStartingNode()
-        {   
+            
+            var nodeManager = new NodeManager();
+            var nodeCreator = new NodeCreator(graphView.Graph, nodeManager);
+            
+            var addNode = new AddNodeMenu(rootVisualElement, nodeCreator);
+            
+            var startingNode = nodeCreator.CreateStartingNode();
         }
     }
 }

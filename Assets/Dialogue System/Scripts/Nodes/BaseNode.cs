@@ -1,9 +1,6 @@
 using System.Collections.Generic;
-using Dialogue_System.Scripts.Managers;
-using Unity.GraphToolkit.Editor;
-using UnityEngine;
+using Dialogue_System.Scripts.Interfaces;
 using UnityEngine.UIElements;
-using UnityEngine.VFX;
 using Node = UnityEditor.Experimental.GraphView.Node;
 
 namespace Dialogue_System.Scripts.Nodes
@@ -11,11 +8,13 @@ namespace Dialogue_System.Scripts.Nodes
     public abstract class BaseNode : Node
     {
         public List<string> DialogueLines = new();
-        protected BaseNode()
+
+        private readonly INodeSaver _nodeSaver;
+        
+        protected BaseNode(INodeSaver nodeSaver)
         {
-            var nodeManager = NodeManager.Instance;
-            nodeManager.GraphView.AddElement(this);
-            nodeManager.Nodes.Add(this);
+            _nodeSaver = nodeSaver;
+            _nodeSaver.SaveNode(this);
             RegisterCallback<DetachFromPanelEvent>(OnDetachFromPanel);
         }
         
@@ -27,9 +26,8 @@ namespace Dialogue_System.Scripts.Nodes
 
         private void OnDetachFromPanel(DetachFromPanelEvent evt)
         {
-            NodeManager.Instance.Nodes.Remove(this);
+            _nodeSaver.RemoveNode(this);
         }
         protected abstract void SetupNode();
-
     }
 }
