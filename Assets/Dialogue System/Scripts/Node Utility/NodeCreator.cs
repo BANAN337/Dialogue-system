@@ -6,8 +6,8 @@ namespace Dialogue_System.Scripts.Node_Utility
 {
     public class NodeCreator
     {
-        private GraphView _graphView;
-        private INodeSaver _nodeSaver;
+        private static GraphView _graphView;
+        private static INodeSaver _nodeSaver;
         
         public NodeCreator(GraphView graphView, INodeSaver nodeSaver)
         {
@@ -15,14 +15,14 @@ namespace Dialogue_System.Scripts.Node_Utility
             _nodeSaver = nodeSaver;
         }
 
-        public StartingNode CreateStartingNode()
+        public static StartingNode CreateStartingNode()
         {
             var startingNode = new StartingNode(_nodeSaver);
             _graphView.AddElement(startingNode);
             return startingNode;
         }
         
-        public DialogueNode CreateDialogueNode()
+        public static DialogueNode CreateDialogueNode()
         {
             var dialogueNode = new DialogueNode(_nodeSaver);
             _graphView.AddElement(dialogueNode);

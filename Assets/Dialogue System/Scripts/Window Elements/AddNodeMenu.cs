@@ -14,11 +14,9 @@ namespace Dialogue_System.Scripts.Window_Elements
         public override string ElementName => "AddNode";
         
         private readonly ToolbarMenu _toolbarMenu;
-        private NodeCreator _nodeCreator;
         
-        public AddNodeMenu(VisualElement elementContainer, NodeCreator nodeCreator) : base(elementContainer)
+        public AddNodeMenu(VisualElement elementContainer) : base(elementContainer)
         {
-            _nodeCreator = nodeCreator;
             _toolbarMenu = elementContainer.Q<ToolbarMenu>(ElementName);
             ConfigureElement();
         }
@@ -27,7 +25,7 @@ namespace Dialogue_System.Scripts.Window_Elements
         {
             _toolbarMenu.menu.AppendAction("Dialogue Node", _ =>
             {
-                var dialogueNode = _nodeCreator.CreateDialogueNode();
+                var dialogueNode = NodeCreator.CreateDialogueNode();
             });
         }
     }

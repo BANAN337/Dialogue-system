@@ -34,9 +34,9 @@ namespace Dialogue_System.Scripts.Window_Elements
             var nodeManager = new NodeManager();
             var nodeCreator = new NodeCreator(graphView.Graph, nodeManager);
             
-            var addNode = new AddNodeMenu(rootVisualElement, nodeCreator);
+            var addNode = new AddNodeMenu(rootVisualElement);
             
-            var startingNode = nodeCreator.CreateStartingNode();
+            var startingNode = NodeCreator.CreateStartingNode();
         }
     }
 }

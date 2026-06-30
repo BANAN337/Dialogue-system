@@ -15,9 +15,6 @@ namespace Dialogue_System.Scripts.Nodes
         protected override void SetupNode()
         {
             name = "Dialogue Node";
-            
-            var textField = new TextField("Dialogue Text");
-            mainContainer.Add(textField);
 
             var inputPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(float));
             inputPort.portName = "Input";
@@ -31,6 +28,11 @@ namespace Dialogue_System.Scripts.Nodes
             SetPosition(Rect.zero);
 
             RefreshNode();
+        }
+
+        private void EditNodeButton()
+        {
+            
         }
     }
 }
