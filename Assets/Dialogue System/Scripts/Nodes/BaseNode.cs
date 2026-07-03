@@ -7,7 +7,7 @@ namespace Dialogue_System.Scripts.Nodes
 {
     public abstract class BaseNode : Node
     {
-        public List<string> DialogueLines = new();
+        public List<string> DialogueLines { get; set; } = new();
 
         private readonly INodeSaver _nodeSaver;
         

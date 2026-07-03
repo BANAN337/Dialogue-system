@@ -7,13 +7,8 @@ namespace Dialogue_System.Scripts.Nodes
 {
     public class StartingNode : BaseNode
     {
-        public static StartingNode Instance { get; private set; } 
-        
         public StartingNode(INodeSaver nodeSaver) : base(nodeSaver)
         {
-            if(Instance != null) return;
-            Instance = this;
-            
             SetupNode();
         }
 

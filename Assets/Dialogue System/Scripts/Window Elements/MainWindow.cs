@@ -11,12 +11,14 @@ namespace Dialogue_System.Scripts.Window_Elements
     public class MainWindow : EditorWindow
     {
         [SerializeField] private VisualTreeAsset tree;
-        
+
+        private const string WindowTitle = "Dialogue Graph Editor";
+
         [MenuItem("Window/Dialogue Editor")]
         public static void OpenMainWindow()
         {
             var mainWindow = GetWindow<MainWindow>();
-            mainWindow.titleContent = new GUIContent("Dialogue Graph Editor");
+            mainWindow.titleContent = new GUIContent(WindowTitle);
         }
 
         private void CreateGUI()

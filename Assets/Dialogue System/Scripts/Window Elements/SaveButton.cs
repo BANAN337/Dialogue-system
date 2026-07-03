@@ -25,7 +25,6 @@ namespace Dialogue_System.Scripts.Window_Elements
         private void SaveViaPath()
         {
             var path = EditorUtility.SaveFilePanel("Save Dialogue Graph", Application.dataPath, "DialogueGraph", "txt");
-            Debug.Log(path);
             
             if (string.IsNullOrEmpty(path)) return;
             
