@@ -1,3 +1,3 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
-    <ui:ListView name="DialogueLines"/>
+    <ui:ListView name="DialogueLines" show-add-remove-footer="true" reorderable="true" fixed-item-height="200" enabled="true" reorder-mode="Animated" style="min-height: 100%;"/>
 </ui:UXML>

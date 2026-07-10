@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Dialogue_System.Scripts.Interfaces;
 using Dialogue_System.Scripts.Node_Editor;
 using UnityEditor.Experimental.GraphView;
@@ -8,19 +9,17 @@ namespace Dialogue_System.Scripts.Nodes
 {
     public class DialogueNode : BaseNode
     {
+        private const string NodeName = "Dialogue Node";
+        
         public DialogueNode(INodeSaver nodeSaver) : base(nodeSaver)
         {
             SetupNode();
         }
 
-        protected override void SetupNode()
+        protected sealed override void SetupNode()
         {
-            name = "Dialogue Node";
+            name = NodeName;
 
-            
-            
-            
-            
             inputContainer.Add(CreateInputPort());
             outputContainer.Add(CreateOutputPort());
             
@@ -29,20 +28,6 @@ namespace Dialogue_System.Scripts.Nodes
             SetPosition(Rect.zero);
 
             RefreshNode();
-        }
-
-        private Port CreateInputPort()
-        {
-            var inputPort = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Multi, typeof(float));
-            inputPort.portName = "Input";
-            return inputPort;
-        }
-
-        private Port CreateOutputPort()
-        {
-            var outputPort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(float));
-            outputPort.portName = "Output";
-            return outputPort;
         }
 
         private Button CreateEditNodeButton()
@@ -60,9 +45,7 @@ namespace Dialogue_System.Scripts.Nodes
         private void CreateEditButton()
         {
             var editWindow = ScriptableObject.CreateInstance<EditNodeWindow>();
-            editWindow.titleContent = new GUIContent("Edit Node");
             editWindow.SetupListView(DialogueLines);
-            editWindow.Show();
         }
     }
 }

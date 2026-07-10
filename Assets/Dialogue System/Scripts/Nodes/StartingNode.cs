@@ -15,11 +15,8 @@ namespace Dialogue_System.Scripts.Nodes
         protected sealed override void SetupNode()
         {
             title = "Starting Node";
-            
-            var outputPort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(float));
-            outputPort.portName = "Output";
-            
-            outputContainer.Add(outputPort);
+
+            outputContainer.Add(CreateOutputPort());
             
             SetPosition(Rect.zero);
             

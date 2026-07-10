@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using Dialogue_System.Scripts.Interfaces;
 using Dialogue_System.Scripts.Nodes;
-using Unity.GraphToolkit.Editor;
-using UnityEditor.Experimental.GraphView;
 
-namespace Dialogue_System.Scripts.Managers
+namespace Dialogue_System.Scripts.Node_Utility
 {
     public class NodeManager : INodeSaver
     {
