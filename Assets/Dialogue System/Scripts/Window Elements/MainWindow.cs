@@ -1,6 +1,7 @@
 using System;
 using Dialogue_System.Scripts.Node_Utility;
 using Dialogue_System.Scripts.Nodes;
+using Dialogue_System.Scripts.Window_Elements.Change_Language;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,6 +11,7 @@ namespace Dialogue_System.Scripts.Window_Elements
     public class MainWindow : EditorWindow
     {
         [SerializeField] private VisualTreeAsset tree;
+        private LanguagesList _languageList;
 
         private const string WindowTitle = "Dialogue Graph Editor";
 
@@ -22,6 +24,8 @@ namespace Dialogue_System.Scripts.Window_Elements
 
         private void CreateGUI()
         {
+            _languageList = AssetDatabase.LoadAssetAtPath<LanguagesList>("Assets/Dialogue System/Language List/DefaultLanguageList.asset");
+            
             SetupElements();
         }
 
@@ -31,9 +35,14 @@ namespace Dialogue_System.Scripts.Window_Elements
             var toolbar = new ToolbarElement(rootVisualElement);
             var graphView = new GraphElement(rootVisualElement);
             var saveButton = new SaveButton(rootVisualElement);
+
             
-            var nodeManager = new NodeManager();
+            
+            var nodeManager = new NodeManager(_languageList);
             var nodeCreator = new NodeCreator(graphView.Graph, nodeManager);
+            
+            var changeLanguageHandler = new ChangeLanguageHandler(graphView.Graph, nodeManager);
+            var changeLanguage = new ChangeLanguage(toolbar.Toolbar, changeLanguageHandler);
             
             var addNode = new AddNodeMenu(rootVisualElement);
             

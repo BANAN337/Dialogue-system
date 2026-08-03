@@ -18,9 +18,12 @@ namespace Dialogue_System.Scripts.Window_Elements
         private void SetupGraph()
         {
             SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
+            
             this.AddManipulator(new ContentDragger());
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
+            
+            UpdateViewTransform(new Vector3(100,250,0), worldTransform.lossyScale);
         }
 
         private void SetupGrid()

@@ -2,6 +2,7 @@ using Dialogue_System.Scripts.Interfaces;
 using Unity.GraphToolkit.Editor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Dialogue_System.Scripts.Nodes
 {
@@ -18,7 +19,8 @@ namespace Dialogue_System.Scripts.Nodes
 
             outputContainer.Add(CreateOutputPort());
             
-            SetPosition(Rect.zero);
+            capabilities &= ~Capabilities.Movable;
+            capabilities &= ~Capabilities.Deletable;
             
             RefreshNode();
         }

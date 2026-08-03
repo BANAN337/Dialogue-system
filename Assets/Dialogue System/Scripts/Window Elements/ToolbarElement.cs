@@ -1,3 +1,4 @@
+using Dialogue_System.Scripts.Window_Elements.Change_Language;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
@@ -7,17 +8,17 @@ namespace Dialogue_System.Scripts.Window_Elements
     {
         public override string ElementName => "Toolbar";
         
-        private readonly Toolbar _toolbar;
+        public readonly Toolbar Toolbar;
 
         public ToolbarElement(VisualElement elementContainer) : base(elementContainer)
         {
-            _toolbar = elementContainer.Q<Toolbar>(ElementName);
+            Toolbar = elementContainer.Q<Toolbar>(ElementName);
             ConfigureElement();
         }
 
         protected override void ConfigureElement()
         {
-            _toolbar.StretchToParentSize();
+            Toolbar.StretchToParentSize();
         }
     }
 }
