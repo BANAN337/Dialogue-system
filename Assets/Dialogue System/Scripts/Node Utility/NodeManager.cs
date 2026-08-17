@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Dialogue_System.Scripts.Interfaces;
 using Dialogue_System.Scripts.Nodes;
+using UnityEngine;
+using BaseNode = Dialogue_System.Scripts.Nodes.BaseNode;
 
 namespace Dialogue_System.Scripts.Node_Utility
 {
@@ -9,8 +11,7 @@ namespace Dialogue_System.Scripts.Node_Utility
     {
         public string CurrentLanguage { get; set; }
 
-        public List<BaseNode> Nodes { get; } = new();
-        public Dictionary<string, List<BaseNode>> NodeDictionary { get; private set; }
+        public Dictionary<string, NodeSaveData> NodeDictionary { get; private set; }
 
         public LanguagesList LanguageList {get; }
 
@@ -25,17 +26,17 @@ namespace Dialogue_System.Scripts.Node_Utility
 
         private void SetupDictionary()
         {
-            NodeDictionary = LanguageList.languages.ToDictionary(language => language, language => new List<BaseNode>());
+            NodeDictionary = LanguageList.languages.ToDictionary(language => language, _ => new NodeSaveData());
         }
 
         public void SaveNode(BaseNode node)
         {
-            NodeDictionary[CurrentLanguage].Add(node);
+            NodeDictionary[CurrentLanguage].Nodes.Add(node);
         }
 
         public void RemoveNode(BaseNode node)
         {
-            NodeDictionary[CurrentLanguage].Remove(node);
+            NodeDictionary[CurrentLanguage].Nodes.Remove(node);
         }
     }
 }

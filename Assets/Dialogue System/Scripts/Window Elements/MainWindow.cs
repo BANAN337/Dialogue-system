@@ -40,13 +40,18 @@ namespace Dialogue_System.Scripts.Window_Elements
             
             var nodeManager = new NodeManager(_languageList);
             var nodeCreator = new NodeCreator(graphView.Graph, nodeManager);
+
+            foreach (var list in nodeManager.NodeDictionary.Values)
+            {
+                list.Nodes.Add(NodeCreator.CreateStartingNode());
+            }
             
             var changeLanguageHandler = new ChangeLanguageHandler(graphView.Graph, nodeManager);
             var changeLanguage = new ChangeLanguage(toolbar.Toolbar, changeLanguageHandler);
             
             var addNode = new AddNodeMenu(rootVisualElement);
             
-            var startingNode = NodeCreator.CreateStartingNode();
+            NodeLoader.LoadGraph(nodeManager.NodeDictionary[nodeManager.CurrentLanguage], graphView.Graph);
         }
     }
 }

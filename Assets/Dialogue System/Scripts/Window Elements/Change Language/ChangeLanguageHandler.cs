@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Dialogue_System.Scripts.Node_Utility;
+using Dialogue_System.Scripts.Nodes;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
 
 namespace Dialogue_System.Scripts.Window_Elements.Change_Language
-{
+{ 
     public class ChangeLanguageHandler
     {
         private GraphView _graphView;
@@ -20,14 +23,24 @@ namespace Dialogue_System.Scripts.Window_Elements.Change_Language
             
             Choices = _nodeManager.NodeDictionary.Keys.ToList();
         }
-
-    public void OnLanguageChange(ChangeEvent<string> changeEvent)
+        
+        public void OnLanguageChange(ChangeEvent<string> changeEvent)
         {
-            _graphView.DeleteElements(_nodeManager.NodeDictionary[changeEvent.previousValue]);
+            var nodesToDelete = _nodeManager.NodeDictionary[changeEvent.previousValue].Nodes;
+            
+            var edgesToDelete = _graphView.edges.ToList();
+
+            var json = _nodeManager.NodeDictionary[changeEvent.previousValue].SerializeNodes();
+            
+            Debug.Log(nodesToDelete.Count);
+            Debug.Log(json);
+            
+            _graphView.DeleteElements(nodesToDelete);
+            _graphView.DeleteElements(edgesToDelete);
             
             _nodeManager.CurrentLanguage = changeEvent.newValue;
             
-            //do saving next
+            NodeLoader.LoadGraph(_nodeManager.NodeDictionary[_nodeManager.CurrentLanguage], _graphView);
         }
     }
 }

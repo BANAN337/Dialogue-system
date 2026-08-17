@@ -26,9 +26,9 @@ namespace Dialogue_System.Scripts.Window_Elements.Change_Language
             
             Popup.label = Title;
             
-            Popup.RegisterValueChangedCallback((evt) =>
+            Popup.RegisterValueChangedCallback(evt =>
             {
-                
+                _changeLanguageHandler.OnLanguageChange(evt);
             });
 
             Popup.choices = _changeLanguageHandler.Choices;
