@@ -1,0 +1,4 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Dialogue%20System/USS/ChoiceField.uss?fileID=7433441132597879392&amp;guid=110a75257f491564188a659429ac5f99&amp;type=3#ChoiceField"/>
+    <ui:TextField label="" placeholder-text="filler text" name="ChoiceText" style="flex-grow: 2; width: 38%; min-width: 50%;"/>
+</ui:UXML>

@@ -30,7 +30,7 @@ namespace Dialogue_System.Scripts.Window_Elements.Change_Language
             
             var edgesToDelete = _graphView.edges.ToList();
 
-            var json = _nodeManager.NodeDictionary[changeEvent.previousValue].SerializeNodes();
+            var json = _nodeManager.NodeDictionary[changeEvent.previousValue].SerializeNodes(nodesToDelete);
             
             Debug.Log(nodesToDelete.Count);
             Debug.Log(json);

@@ -11,6 +11,7 @@ namespace Dialogue_System.Scripts.Nodes
     public class DialogueNode : BaseNode
     {
         private const string NodeName = "Dialogue Node";
+        public DialogueNodeElements Elements { get; private set; }
 
         public DialogueNode(INodeSaver nodeSaver) : base(nodeSaver)
         {
@@ -33,7 +34,7 @@ namespace Dialogue_System.Scripts.Nodes
 
         private void CreateElements()
         {
-            var elements = new DialogueNodeElements(this);
+            Elements = new DialogueNodeElements(this);
         }
     }
 }

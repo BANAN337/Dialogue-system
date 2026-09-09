@@ -8,7 +8,7 @@ namespace Dialogue_System.Scripts.Node_Editor
         public TextField CharacterName { get; private set; }
         public TextField DialogueLine { get; private set; }
         
-        protected override string TreePath => "Assets/Dialogue System/UXML/ListElement.uxml";
+        protected override string TreePath => "Assets/Dialogue System/UXML/DialogueNode.uxml";
         
         private const string CharacterNameTitle = "CharacterName";
         private const string DialogueLineTitle = "Text";

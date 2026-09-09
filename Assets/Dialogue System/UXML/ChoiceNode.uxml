@@ -1,5 +1,9 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <ui:VisualElement name="Root" style="flex-grow: 1; width: 394px; height: 210px;">
+        <ui:VisualElement name="Buttons" style="flex-grow: 0; flex-direction: row; flex-wrap: nowrap;">
+            <ui:Button text="Add Choice" name="AddChoice" style="width: auto; flex-grow: 1;"/>
+            <ui:Button text="Remove Choice" name="RemoveChoice" style="width: auto; flex-grow: 1;"/>
+        </ui:VisualElement>
         <ui:TextField label="Character Name" placeholder-text="filler text" name="CharacterName" style="height: auto; flex-grow: 0;"/>
         <ui:TextField label="Text" placeholder-text="filler text" name="Text" multiline="true" hide-mobile-input="false" style="white-space: normal; height: auto; flex-grow: 2;"/>
     </ui:VisualElement>

@@ -26,6 +26,10 @@ namespace Dialogue_System.Scripts.Window_Elements
             {
                 var dialogueNode = NodeCreator.CreateDialogueNode();
             });
+            _toolbarMenu.menu.AppendAction("Choice Node", _ => 
+            {
+                var choiceNode = NodeCreator.CreateChoiceNode();
+            });
         }
     }
 }

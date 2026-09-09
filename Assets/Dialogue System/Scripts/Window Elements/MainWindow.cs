@@ -35,15 +35,17 @@ namespace Dialogue_System.Scripts.Window_Elements
             var toolbar = new ToolbarElement(rootVisualElement);
             var graphView = new GraphElement(rootVisualElement);
             var saveButton = new SaveButton(rootVisualElement);
-
-            
             
             var nodeManager = new NodeManager(_languageList);
             var nodeCreator = new NodeCreator(graphView.Graph, nodeManager);
 
-            foreach (var list in nodeManager.NodeDictionary.Values)
+            foreach (var language in nodeManager.NodeDictionary.Keys)
             {
-                list.Nodes.Add(NodeCreator.CreateStartingNode());
+                var value = nodeManager.NodeDictionary[language];
+
+                value.Nodes.Add(language == nodeManager.CurrentLanguage
+                    ? NodeCreator.CreateStartingNode()
+                    : new StartingNode(nodeManager));
             }
             
             var changeLanguageHandler = new ChangeLanguageHandler(graphView.Graph, nodeManager);

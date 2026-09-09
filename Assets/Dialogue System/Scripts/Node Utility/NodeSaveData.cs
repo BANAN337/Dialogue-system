@@ -8,15 +8,10 @@ namespace Dialogue_System.Scripts.Node_Utility
     {
         public List<BaseNode> Nodes { get; } = new();
         public string SavedNodes { get; set; } = "";
-
-        public NodeSaveData()
-        {
-            SerializeNodes();
-        }
         
-        public string SerializeNodes()
+        public string SerializeNodes(List<BaseNode> nodes)
         {
-            SavedNodes = JsonUtility.ToJson(Nodes.ToArray());
+            //SavedNodes = JsonConvertor.CreateDto(nodes);
             return SavedNodes;
         }
 
@@ -26,7 +21,8 @@ namespace Dialogue_System.Scripts.Node_Utility
             {
                 return null;
             }
-            return JsonUtility.FromJson<List<BaseNode>>(SavedNodes);
+
+            return null;
         }
     }
 }
