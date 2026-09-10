@@ -7,11 +7,11 @@ namespace Dialogue_System.Scripts.Node_Utility
     public class NodeSaveData
     {
         public List<BaseNode> Nodes { get; } = new();
-        public string SavedNodes { get; set; } = "";
+        private string SavedNodes { get; set; } = "";
         
         public string SerializeNodes(List<BaseNode> nodes)
         {
-            //SavedNodes = JsonConvertor.CreateDto(nodes);
+            SavedNodes = JsonConvertor.ConvertToJson(nodes);
             return SavedNodes;
         }
 
@@ -21,6 +21,8 @@ namespace Dialogue_System.Scripts.Node_Utility
             {
                 return null;
             }
+            
+            var convertedNodes = JsonConvertor.ConvertFromJson(SavedNodes);
 
             return null;
         }
