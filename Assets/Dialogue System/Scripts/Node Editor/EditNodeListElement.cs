@@ -27,8 +27,8 @@ namespace Dialogue_System.Scripts.Node_Editor
                 dialogueElement = new DialogueElement();
             }
             
-            CharacterName.value = dialogueElement.CharacterName;
-            DialogueLine.value = dialogueElement.DialogueLine;
+            CharacterName.value = dialogueElement.characterName;
+            DialogueLine.value = dialogueElement.dialogueLine;
         }
     }
 }

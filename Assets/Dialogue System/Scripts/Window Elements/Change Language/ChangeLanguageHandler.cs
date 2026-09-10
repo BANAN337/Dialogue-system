@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using Dialogue_System.Scripts.Node_Editor;
 using Dialogue_System.Scripts.Node_Utility;
 using Dialogue_System.Scripts.Nodes;
+using Dialogue_System.Scripts.Nodes.Base;
+using Dialogue_System.Scripts.Nodes.Dialogue_Node;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -31,6 +34,7 @@ namespace Dialogue_System.Scripts.Window_Elements.Change_Language
             var edgesToDelete = _graphView.edges.ToList();
 
             var json = _nodeManager.NodeDictionary[changeEvent.previousValue].SerializeNodes(nodesToDelete);
+
             
             Debug.Log(nodesToDelete.Count);
             Debug.Log(json);

@@ -11,9 +11,9 @@ namespace Dialogue_System.Scripts.Nodes.Dialogue_Node
     [Serializable]
     public class NodeDto
     {
-        public string TypeName { get; set; }
-        public DialogueElement DialogueElement { get; set; }
-        public Rect NodePosition { get; set; }
-        public string[] ChoicesText { get; set; }
+        public string typeName;
+        public DialogueElement dialogueElement = new();
+        public Rect nodePosition;
+        public string[] choicesText;
     }
 }

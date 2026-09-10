@@ -46,8 +46,8 @@ namespace Dialogue_System.Scripts.Node_Editor
             for (var i = 0; i < _dialogueLines.Count; i++)
             {
                 var line = _dialogueLines[i];
-                line ??= new DialogueElement {CharacterName = "null"};
-                Debug.Log($"{line.CharacterName} {index} in _dialogueLines");
+                line ??= new DialogueElement {characterName = "null"};
+                Debug.Log($"{line.characterName} {index} in _dialogueLines");
             }
         }
 
