@@ -7,18 +7,18 @@ namespace Dialogue_System.Scripts.Window_Elements
     {
         public override string ElementName => "GraphElement";
         private const string StylePath = "Assets/Dialogue System/USS/Node.uss";
-        public NodeGraph Graph { get; private set; }
+        
+        private GraphViewManager _graphManager;
 
         public GraphElement(VisualElement elementContainer) : base(elementContainer)
         {
             ConfigureElement();
-            elementContainer.Insert(0, Graph);
+            elementContainer.Insert(0, GraphViewManager.CurrentGraph);
         }
 
         protected sealed override void ConfigureElement()
         {
-            Graph = new NodeGraph();
-            Graph.styleSheets.Add(AssetDatabase.LoadAssetAtPath<StyleSheet>(StylePath));
+            _graphManager = new GraphViewManager();
         }
     }
 }

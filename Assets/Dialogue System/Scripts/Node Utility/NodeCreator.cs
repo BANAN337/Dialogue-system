@@ -10,9 +10,9 @@ namespace Dialogue_System.Scripts.Node_Utility
         private static GraphView _graphView;
         private static INodeSaver _nodeSaver;
         
-        public NodeCreator(GraphView graphView, INodeSaver nodeSaver)
+        public NodeCreator(INodeSaver nodeSaver)
         {
-            _graphView = graphView;
+            _graphView = GraphViewManager.CurrentGraph;
             _nodeSaver = nodeSaver;
         }
 

@@ -19,9 +19,9 @@ namespace Dialogue_System.Scripts.Window_Elements.Change_Language
 
         public List<string> Choices { get; private set; }
 
-        public ChangeLanguageHandler(GraphView graphView, NodeManager nodeManager)
+        public ChangeLanguageHandler(NodeManager nodeManager)
         {
-            _graphView = graphView;
+            _graphView = GraphViewManager.CurrentGraph;
             _nodeManager = nodeManager;
             
             Choices = _nodeManager.NodeDictionary.Keys.ToList();

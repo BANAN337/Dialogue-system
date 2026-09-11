@@ -37,7 +37,7 @@ namespace Dialogue_System.Scripts.Window_Elements
             var saveButton = new SaveButton(rootVisualElement);
             
             var nodeManager = new NodeManager(_languageList);
-            var nodeCreator = new NodeCreator(graphView.Graph, nodeManager);
+            var nodeCreator = new NodeCreator(nodeManager);
 
             foreach (var language in nodeManager.NodeDictionary.Keys)
             {
@@ -48,12 +48,12 @@ namespace Dialogue_System.Scripts.Window_Elements
                     : new StartingNode(nodeManager));
             }
             
-            var changeLanguageHandler = new ChangeLanguageHandler(graphView.Graph, nodeManager);
+            var changeLanguageHandler = new ChangeLanguageHandler(nodeManager);
             var changeLanguage = new ChangeLanguage(toolbar.Toolbar, changeLanguageHandler);
             
             var addNode = new AddNodeMenu(rootVisualElement);
             
-            NodeLoader.LoadGraph(nodeManager.NodeDictionary[nodeManager.CurrentLanguage], graphView.Graph);
+            NodeLoader.LoadGraph(nodeManager.NodeDictionary[nodeManager.CurrentLanguage], GraphViewManager.CurrentGraph);
         }
     }
 }

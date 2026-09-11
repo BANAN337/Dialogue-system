@@ -16,9 +16,18 @@ namespace Dialogue_System.Scripts.Node_Utility
                 return;
             }
             
-            for (var i = 0; i < nodes.Count; i++)
+            foreach (var node in nodes)
             {
-                var node = nodes[i];
+
+                switch (node)
+                {
+                    case DialogueNode dialogueNode:
+                    {
+                        
+                        
+                        break;
+                    }
+                }
                 
                 node.SetPosition(Rect.zero);
                 graphView.AddElement(node);
