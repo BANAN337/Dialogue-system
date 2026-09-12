@@ -1,13 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Dialogue_System.Scripts.Node_Editor;
 using Dialogue_System.Scripts.Node_Utility;
-using Dialogue_System.Scripts.Nodes;
-using Dialogue_System.Scripts.Nodes.Base;
-using Dialogue_System.Scripts.Nodes.Dialogue_Node;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
 
 namespace Dialogue_System.Scripts.Window_Elements.Change_Language
@@ -29,22 +24,29 @@ namespace Dialogue_System.Scripts.Window_Elements.Change_Language
         
         public void OnLanguageChange(ChangeEvent<string> changeEvent)
         {
-            var nodesToDelete = _nodeManager.NodeDictionary[changeEvent.previousValue].Nodes;
+            var newLanguage = changeEvent.newValue;
+            var previousLanguage = changeEvent.previousValue;
+            
+            if (previousLanguage == newLanguage)
+            {
+                return;
+            }
+            
+            var nodesToDelete = _nodeManager.NodeDictionary[previousLanguage].Nodes;
             
             var edgesToDelete = _graphView.edges.ToList();
 
-            var json = _nodeManager.NodeDictionary[changeEvent.previousValue].SerializeNodes(nodesToDelete);
-
+            var json = _nodeManager.NodeDictionary[previousLanguage].SerializeNodes();
             
-            Debug.Log(nodesToDelete.Count);
-            Debug.Log(json);
+            //Debug.Log(nodesToDelete.Count);
+            //Debug.Log(json);
             
             _graphView.DeleteElements(nodesToDelete);
             _graphView.DeleteElements(edgesToDelete);
             
-            _nodeManager.CurrentLanguage = changeEvent.newValue;
+            _nodeManager.CurrentLanguage = newLanguage;
             
-            NodeLoader.LoadGraph(_nodeManager.NodeDictionary[_nodeManager.CurrentLanguage], _graphView);
+            NodeLoader.LoadGraph(_nodeManager.NodeDictionary[_nodeManager.CurrentLanguage]);
         }
     }
 }

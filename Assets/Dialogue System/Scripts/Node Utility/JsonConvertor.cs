@@ -31,7 +31,6 @@ namespace Dialogue_System.Scripts.Node_Utility
                         
                         break;
                     }
-
                 }
             }
 
@@ -45,9 +44,9 @@ namespace Dialogue_System.Scripts.Node_Utility
             return json;
         }
 
-        public static NodeDto[] ConvertFromJson(string json)
+        public static NodeDtoArray ConvertFromJson(string json)
         {
-            var nodeDto = JsonUtility.FromJson<NodeDto[]>(json);
+            var nodeDto = JsonUtility.FromJson<NodeDtoArray>(json);
             return nodeDto;
         }
         

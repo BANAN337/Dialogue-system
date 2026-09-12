@@ -13,14 +13,14 @@ namespace Dialogue_System.Scripts.Node_Utility
 
         public Dictionary<string, NodeSaveData> NodeDictionary { get; private set; }
 
-        public LanguagesList LanguageList {get; }
+        private LanguagesList LanguageList { get; }
 
         public NodeManager(LanguagesList languageList)
         {
             LanguageList = languageList;
-            
+
             CurrentLanguage = LanguageList.languages[0];
-            
+
             SetupDictionary();
         }
 

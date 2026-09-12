@@ -39,21 +39,30 @@ namespace Dialogue_System.Scripts.Window_Elements
             var nodeManager = new NodeManager(_languageList);
             var nodeCreator = new NodeCreator(nodeManager);
 
-            foreach (var language in nodeManager.NodeDictionary.Keys)
-            {
-                var value = nodeManager.NodeDictionary[language];
-
-                value.Nodes.Add(language == nodeManager.CurrentLanguage
-                    ? NodeCreator.CreateStartingNode()
-                    : new StartingNode(nodeManager));
-            }
+            SetupStartingNodes(nodeManager);
             
             var changeLanguageHandler = new ChangeLanguageHandler(nodeManager);
             var changeLanguage = new ChangeLanguage(toolbar.Toolbar, changeLanguageHandler);
             
             var addNode = new AddNodeMenu(rootVisualElement);
-            
-            NodeLoader.LoadGraph(nodeManager.NodeDictionary[nodeManager.CurrentLanguage], GraphViewManager.CurrentGraph);
+        }
+        
+        private void SetupStartingNodes(NodeManager nodeManager)
+        {
+            foreach (var language in nodeManager.NodeDictionary.Keys)
+            {
+                var value = nodeManager.NodeDictionary[language];
+
+                if (language == nodeManager.CurrentLanguage)
+                {
+                    //NodeCreator.CreateStartingNode();
+                }
+                else
+                {
+                    value.Nodes.Add(new StartingNode(nodeManager));
+                    value.SerializeNodes();
+                }
+            }
         }
     }
 }

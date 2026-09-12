@@ -7,30 +7,40 @@ namespace Dialogue_System.Scripts.Node_Utility
 {
     public class NodeLoader
     {
-        public static void LoadGraph(NodeSaveData nodeSaveData, GraphView graphView)
+        public static void LoadGraph(NodeSaveData nodeSaveData)
         {
-            var nodes = nodeSaveData.DeserializeNodes();
+            var nodeDtos = nodeSaveData.DeserializeNodes().nodeDtos;
+            
+            nodeSaveData.Nodes.Clear();
 
-            if (nodes == null)
+            if (nodeDtos == null)
             {
                 return;
             }
             
-            foreach (var node in nodes)
+            foreach (var nodeDto in nodeDtos)
             {
-
-                switch (node)
+                switch (nodeDto.typeName)
                 {
-                    case DialogueNode dialogueNode:
+                    case nameof(StartingNode):
                     {
+                        var newNode = NodeCreator.CreateStartingNode();
                         
+                        newNode.SetPosition(nodeDto.nodePosition);
+                        
+                        break;
+                    }
+                    case nameof(DialogueNode):
+                    {
+                        var newNode = NodeCreator.CreateDialogueNode();
+                        
+                        newNode.SetPosition(nodeDto.nodePosition);
+                        newNode.Elements.DialogueLine.value = nodeDto.dialogueElement.dialogueLine;
+                        newNode.Elements.CharacterName.value = nodeDto.dialogueElement.characterName;
                         
                         break;
                     }
                 }
-                
-                node.SetPosition(Rect.zero);
-                graphView.AddElement(node);
             }
         }
     }

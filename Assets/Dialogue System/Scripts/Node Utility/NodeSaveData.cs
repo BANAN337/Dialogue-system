@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Dialogue_System.Scripts.Nodes;
+using Dialogue_System.Scripts.Nodes.Base;
+using Dialogue_System.Scripts.Nodes.Dialogue_Node;
 using UnityEngine;
 
 namespace Dialogue_System.Scripts.Node_Utility
@@ -9,13 +11,13 @@ namespace Dialogue_System.Scripts.Node_Utility
         public List<BaseNode> Nodes { get; } = new();
         private string SavedNodes { get; set; } = "";
         
-        public string SerializeNodes(List<BaseNode> nodes)
+        public string SerializeNodes()
         {
-            SavedNodes = JsonConvertor.ConvertToJson(nodes);
+            SavedNodes = JsonConvertor.ConvertToJson(Nodes);
             return SavedNodes;
         }
 
-        public List<BaseNode> DeserializeNodes()
+        public NodeDtoArray DeserializeNodes()
         {
             if (string.IsNullOrEmpty(SavedNodes))
             {
@@ -24,7 +26,7 @@ namespace Dialogue_System.Scripts.Node_Utility
             
             var convertedNodes = JsonConvertor.ConvertFromJson(SavedNodes);
 
-            return null;
+            return convertedNodes;
         }
     }
 }
