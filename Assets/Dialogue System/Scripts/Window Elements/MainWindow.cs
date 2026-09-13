@@ -49,18 +49,25 @@ namespace Dialogue_System.Scripts.Window_Elements
         
         private void SetupStartingNodes(NodeManager nodeManager)
         {
+            var count = 1;
             foreach (var language in nodeManager.NodeDictionary.Keys)
             {
                 var value = nodeManager.NodeDictionary[language];
 
                 if (language == nodeManager.CurrentLanguage)
                 {
-                    //NodeCreator.CreateStartingNode();
+                    NodeCreator.CreateStartingNode();
                 }
                 else
                 {
-                    value.Nodes.Add(new StartingNode(nodeManager));
+                    var newNode = new StartingNode(nodeManager);
+                    
+                    nodeManager.RemoveNode(newNode);
+                    
+                    value.Nodes.Add(newNode);
+                    
                     value.SerializeNodes();
+                    
                 }
             }
         }

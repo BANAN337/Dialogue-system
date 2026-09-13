@@ -19,9 +19,8 @@ namespace Dialogue_System.Scripts.Nodes
 
             outputContainer.Add(CreateOutputPort());
             
-            //capabilities &= ~Capabilities.Movable;
-            //capabilities &= ~Capabilities.Selectable;
-            //capabilities &= ~Capabilities.Deletable;
+            capabilities &= ~Capabilities.Movable;
+            capabilities &= ~Capabilities.Deletable;
             
             RefreshNode();
         }

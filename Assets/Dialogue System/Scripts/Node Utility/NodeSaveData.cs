@@ -19,11 +19,6 @@ namespace Dialogue_System.Scripts.Node_Utility
 
         public NodeDtoArray DeserializeNodes()
         {
-            if (string.IsNullOrEmpty(SavedNodes))
-            {
-                return null;
-            }
-            
             var convertedNodes = JsonConvertor.ConvertFromJson(SavedNodes);
 
             return convertedNodes;
