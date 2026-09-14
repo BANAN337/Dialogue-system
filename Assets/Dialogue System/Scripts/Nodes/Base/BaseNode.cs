@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Dialogue_System.Scripts.Interfaces;
 using Dialogue_System.Scripts.Node_Editor;
@@ -11,6 +12,8 @@ namespace Dialogue_System.Scripts.Nodes
     public abstract class BaseNode : Node
     {
         public List<DialogueElement> DialogueLines { get; set; } = new();
+        
+        public string Id { get; set; }
 
         private readonly INodeSaver _nodeSaver;
         
@@ -18,6 +21,8 @@ namespace Dialogue_System.Scripts.Nodes
         {
             _nodeSaver = nodeSaver;
             _nodeSaver.SaveNode(this);
+            Id = Guid.NewGuid().ToString();
+            
             RegisterCallback<DetachFromPanelEvent>(OnDetachFromPanel);
         }
         

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Dialogue_System.Scripts.Node_Editor;
+using Dialogue_System.Scripts.Nodes.Choice_Node;
 using UnityEngine.UIElements;
 
 namespace Dialogue_System.Scripts.Nodes.ChoiceElements
@@ -39,7 +40,5 @@ namespace Dialogue_System.Scripts.Nodes.ChoiceElements
         {
             element.Add(Root);
         }
-
-        
     }
 }

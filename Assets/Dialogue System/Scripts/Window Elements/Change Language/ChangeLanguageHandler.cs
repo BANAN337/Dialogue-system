@@ -38,6 +38,8 @@ namespace Dialogue_System.Scripts.Window_Elements.Change_Language
 
             var json = _nodeManager.NodeDictionary[previousLanguage].SerializeNodes();
             
+            Debug.Log(json);
+            
             _graphView.DeleteElements(nodesToDelete);
             _graphView.DeleteElements(edgesToDelete);
             

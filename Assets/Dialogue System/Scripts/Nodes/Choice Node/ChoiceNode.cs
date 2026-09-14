@@ -1,4 +1,5 @@
 using Dialogue_System.Scripts.Interfaces;
+using Dialogue_System.Scripts.Nodes.Choice_Node;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -6,7 +7,7 @@ namespace Dialogue_System.Scripts.Nodes.ChoiceElements
 {
     public class ChoiceNode : BaseNode
     {
-        private ChoiceNodeElements _elements;
+        public ChoiceNodeElements Elements {get; private set;}
 
         private VisualElement _choiceTextContainer;
         
@@ -23,8 +24,8 @@ namespace Dialogue_System.Scripts.Nodes.ChoiceElements
             
             AddChoiceAction();
 
-            _elements.AddChoice.clicked += AddChoiceAction;
-            _elements.RemoveChoice.clicked += RemoveChoiceAction;
+            Elements.AddChoice.clicked += AddChoiceAction;
+            Elements.RemoveChoice.clicked += RemoveChoiceAction;
 
             SetPosition(Rect.zero);
 
@@ -33,37 +34,37 @@ namespace Dialogue_System.Scripts.Nodes.ChoiceElements
         
         private void CreateElements()
         {
-            _elements = new ChoiceNodeElements(this);
+            Elements = new ChoiceNodeElements(this);
 
             _choiceTextContainer = new VisualElement();
             
             topContainer.Insert(1, _choiceTextContainer);
+            
+            var inputPort = CreateInputPort();
+            inputContainer.Add(inputPort);
         }
         
         private void AddChoiceAction()
         {
-            var inputPort = CreateInputPort();
             var outputPort = CreateOutputPort();
             var textField = CreateChoiceTextField();
             
-            inputContainer.Add(inputPort);
             outputContainer.Add(outputPort);
 
             _choiceTextContainer.Add(textField);
             
-            _elements.ChoicesData.Push(new ChoiceData(inputPort, outputPort, textField));
+            Elements.ChoicesData.Push(new ChoiceData(outputPort, textField));
         }
 
         private void RemoveChoiceAction()
         {
-            if (_elements.ChoicesData.Count == 1)
+            if (Elements.ChoicesData.Count == 1)
             {
                 return;
             }
             
-            var choiceData = _elements.ChoicesData.Pop();
+            var choiceData = Elements.ChoicesData.Pop();
             
-            inputContainer.Remove(choiceData.InputPort);
             outputContainer.Remove(choiceData.OutputPort);
             _choiceTextContainer.Remove(choiceData.ChoiceText);
         }

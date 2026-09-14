@@ -49,7 +49,6 @@ namespace Dialogue_System.Scripts.Window_Elements
         
         private void SetupStartingNodes(NodeManager nodeManager)
         {
-            var count = 1;
             foreach (var language in nodeManager.NodeDictionary.Keys)
             {
                 var value = nodeManager.NodeDictionary[language];
