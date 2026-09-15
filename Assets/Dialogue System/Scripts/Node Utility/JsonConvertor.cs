@@ -33,6 +33,12 @@ namespace Dialogue_System.Scripts.Node_Utility
                         
                         break;
                     }
+                    case ChoiceNode choiceNode:
+                    {
+                        jsonNodes.Add(ConvertChoiceNode(choiceNode));
+                        
+                        break;
+                    }
                 }
             }
 
@@ -84,6 +90,24 @@ namespace Dialogue_System.Scripts.Node_Utility
             return dialogueNodeDto;
         }
 
+        private static NodeDto ConvertChoiceNode(ChoiceNode choiceNode)
+        {
+            var choiceNodeDto = new NodeDto
+            {
+                typeName = nameof(ChoiceNode),
+                nodePosition = choiceNode.GetPosition(),
+                dialogueElement =
+                {
+                    dialogueLine = choiceNode.Elements.DialogueLine.value,
+                    characterName = choiceNode.Elements.CharacterName.value
+                }
+            };
+            
+            AddChoiceNodeIds(choiceNode, choiceNodeDto);
+            
+            return choiceNodeDto;
+        }
+
         private static NodeDto AddInputNodeIds(BaseNode node, NodeDto nodeDto)
         {
             nodeDto.nodeId = node.Id;
@@ -123,14 +147,7 @@ namespace Dialogue_System.Scripts.Node_Utility
             var inputNodesId = new List<string>();
             var choicesData = new List<ChoiceDataDto>();
             
-            foreach (var port in node.inputContainer.Children().OfType<Edge>())
-            {
-                foreach (var edge in port.output.connections)
-                {
-                    var connectedNode = (BaseNode)edge.input.node;
-                    inputNodesId.Add(connectedNode.Id);
-                }
-            }
+            AddInputNodeIds(node, nodeDto);
 
             foreach (var data in node.Elements.ChoicesData)
             {
@@ -144,7 +161,6 @@ namespace Dialogue_System.Scripts.Node_Utility
                 choicesData.Add(newChoicesData);
             }
             
-            nodeDto.inputNodesId = inputNodesId.ToArray();
             nodeDto.choicesData = choicesData.ToArray();
             
             return nodeDto;
