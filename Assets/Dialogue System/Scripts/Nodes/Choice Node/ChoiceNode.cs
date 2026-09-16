@@ -22,7 +22,7 @@ namespace Dialogue_System.Scripts.Nodes.ChoiceElements
             
             CreateElements();
             
-            AddChoiceAction();
+            AddChoice();
 
             Elements.AddChoice.clicked += AddChoiceAction;
             Elements.RemoveChoice.clicked += RemoveChoiceAction;
@@ -44,7 +44,7 @@ namespace Dialogue_System.Scripts.Nodes.ChoiceElements
             inputContainer.Add(inputPort);
         }
         
-        private void AddChoiceAction()
+        public ChoiceData AddChoice()
         {
             var outputPort = CreateOutputPort();
             var textField = CreateChoiceTextField();
@@ -52,8 +52,17 @@ namespace Dialogue_System.Scripts.Nodes.ChoiceElements
             outputContainer.Add(outputPort);
 
             _choiceTextContainer.Add(textField);
+
+            var choiceData = new ChoiceData(outputPort, textField);
             
-            Elements.ChoicesData.Push(new ChoiceData(outputPort, textField));
+            Elements.ChoicesData.Push(choiceData);
+            
+            return choiceData; 
+        }
+
+        private void AddChoiceAction()
+        {
+            AddChoice();
         }
 
         private void RemoveChoiceAction()
