@@ -17,7 +17,9 @@ namespace Dialogue_System.Scripts.Nodes
         {
             title = "Starting Node";
 
-            outputContainer.Add(CreateOutputPort());
+            OutputPort = CreateOutputPort();
+            
+            outputContainer.Add(OutputPort);
             
             capabilities &= ~Capabilities.Movable;
             capabilities &= ~Capabilities.Deletable;

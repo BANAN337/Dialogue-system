@@ -22,8 +22,11 @@ namespace Dialogue_System.Scripts.Nodes
         {
             name = NodeName;
 
-            inputContainer.Add(CreateInputPort());
-            outputContainer.Add(CreateOutputPort());
+            InputPort = CreateInputPort();
+            OutputPort = CreateOutputPort();
+            
+            inputContainer.Add(InputPort);
+            outputContainer.Add(OutputPort);
 
             CreateElements();
 

@@ -14,6 +14,9 @@ namespace Dialogue_System.Scripts.Nodes
         public List<DialogueElement> DialogueLines { get; set; } = new();
         
         public string Id { get; set; }
+        
+        public Port InputPort { get; protected set; }
+        public Port OutputPort { get; protected set; }
 
         private readonly INodeSaver _nodeSaver;
         

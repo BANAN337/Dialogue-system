@@ -63,6 +63,7 @@ namespace Dialogue_System.Scripts.Node_Utility
             var startingNodeDto = new NodeDto
             {
                 typeName = nameof(StartingNode),
+                nodeId = startingNode.Id,
                 nodePosition = startingNode.GetPosition()
             };
 
@@ -76,6 +77,7 @@ namespace Dialogue_System.Scripts.Node_Utility
             var dialogueNodeDto = new NodeDto
             {
                 typeName = nameof(DialogueNode),
+                nodeId = dialogueNode.Id,
                 nodePosition = dialogueNode.GetPosition(),
                 dialogueElement =
                 {
@@ -95,6 +97,7 @@ namespace Dialogue_System.Scripts.Node_Utility
             var choiceNodeDto = new NodeDto
             {
                 typeName = nameof(ChoiceNode),
+                nodeId = choiceNode.Id,
                 nodePosition = choiceNode.GetPosition(),
                 dialogueElement =
                 {
@@ -110,7 +113,6 @@ namespace Dialogue_System.Scripts.Node_Utility
 
         private static NodeDto AddInputNodeIds(BaseNode node, NodeDto nodeDto)
         {
-            nodeDto.nodeId = node.Id;
             var inputNodesId = new List<string>();
             
             foreach (var port in node.inputContainer.Children().OfType<Port>())
@@ -143,7 +145,6 @@ namespace Dialogue_System.Scripts.Node_Utility
 
         private static NodeDto AddChoiceNodeIds(ChoiceNode node, NodeDto nodeDto)
         {
-            nodeDto.nodeId = node.Id;
             var inputNodesId = new List<string>();
             var choicesData = new List<ChoiceDataDto>();
             

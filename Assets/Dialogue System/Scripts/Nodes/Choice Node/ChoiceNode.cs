@@ -40,8 +40,8 @@ namespace Dialogue_System.Scripts.Nodes.ChoiceElements
             
             topContainer.Insert(1, _choiceTextContainer);
             
-            var inputPort = CreateInputPort();
-            inputContainer.Add(inputPort);
+            InputPort = CreateInputPort();
+            inputContainer.Add(InputPort);
         }
         
         public ChoiceData AddChoice()

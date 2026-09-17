@@ -15,12 +15,14 @@ namespace Dialogue_System.Scripts.Nodes.Dialogue_Node
     {
         public string nodeId;
         public string[] inputNodesId;
-        public string outputNodeId;
+        public string outputNodeId = string.Empty;
         
         public string typeName;
         public DialogueElement dialogueElement = new();
         public Rect nodePosition;
         
         public ChoiceDataDto[] choicesData;
+        
+        public bool nodeCreated;
     }
 }

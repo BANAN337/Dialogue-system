@@ -45,7 +45,7 @@ namespace Dialogue_System.Scripts.Window_Elements.Change_Language
             
             _nodeManager.CurrentLanguage = newLanguage;
             
-            NodeLoader.LoadGraph(_nodeManager.NodeDictionary[_nodeManager.CurrentLanguage]);
+            NodeLoader.Load(_nodeManager.NodeDictionary[_nodeManager.CurrentLanguage]);
         }
     }
 }
