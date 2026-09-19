@@ -3,13 +3,14 @@ using System.Linq;
 using Dialogue_System.Scripts.Nodes;
 using Dialogue_System.Scripts.Nodes.ChoiceElements;
 using Dialogue_System.Scripts.Nodes.Dialogue_Node;
+using Dialogue_System.Scripts.Window_Elements;
 using NUnit.Framework;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Dialogue_System.Scripts.Node_Utility
 {
-    public class NodeLoader
+    public static class NodeLoader
     {
         private static Dictionary<string, BaseNode> _loadedNodes = new();
         private static Dictionary<string, NodeDto> _nodesToLoad = new();
@@ -17,15 +18,22 @@ namespace Dialogue_System.Scripts.Node_Utility
         public static void Load(NodeSaveData nodeSaveData)
         {
             var nodesDto = nodeSaveData.DeserializeNodes();
-            _nodesToLoad = nodesDto.nodeDtos.ToDictionary(nodeDto => nodeDto.nodeId, nodeDto => nodeDto);
+            _loadedNodes.Clear();
+            _nodesToLoad.Clear();
+            
+            foreach (var nodeDto in nodesDto.nodeDtos)
+            {
+                _nodesToLoad.TryAdd(nodeDto.nodeId, nodeDto);
+            }
+
             LoadNode(nodesDto.nodeDtos[0]);
         }
-        
-        public static void LoadNode(NodeDto nodeDto)
+
+        private static BaseNode LoadNode(NodeDto nodeDto)
         {
             if (nodeDto.nodeCreated)
             {
-                return;
+                return null;
             }
             
             switch (nodeDto.typeName)
@@ -39,16 +47,9 @@ namespace Dialogue_System.Scripts.Node_Utility
 
                     _loadedNodes.TryAdd(nodeDto.nodeId, newNode);
 
-                    if (nodeDto.outputNodeId != string.Empty && _loadedNodes.TryGetValue(nodeDto.outputNodeId, out var nodeToConnect))
-                    {
-                        newNode.OutputPort.ConnectTo(nodeToConnect.InputPort);
-                    }
-                    else if (_nodesToLoad.TryGetValue(nodeDto.outputNodeId, out var nodeToLoad))
-                    {
-                        LoadNode(nodeToLoad);
-                    }
+                    ConnectLoadedNode(nodeDto, newNode);
                     
-                    break;
+                    return newNode;
                 }
                 case nameof(DialogueNode):
                 {
@@ -62,106 +63,37 @@ namespace Dialogue_System.Scripts.Node_Utility
                         
                     _loadedNodes.TryAdd(nodeDto.nodeId, newNode);
 
-                    if (nodeDto.outputNodeId != string.Empty && _loadedNodes.TryGetValue(nodeDto.outputNodeId, out var nodeToConnect))
-                    {
-                        newNode.OutputPort.ConnectTo(nodeToConnect.InputPort);
-                    }
-                    else if (_nodesToLoad.TryGetValue(nodeDto.outputNodeId, out var nodeToLoad))
-                    {
-                        LoadNode(nodeToLoad);
-                    }
+                    ConnectLoadedNode(nodeDto, newNode);
 
-                    break;
+                    return newNode;
                 }
-                
+                case nameof(ChoiceNode):
+                {
+                    var newNode = NodeCreator.CreateChoiceNode();
+
+                    
+                    
+                    return newNode;
+                }
+                default:
+                {
+                    return null;
+                }
             }
         }
-        
-        public static void LoadGraph(NodeSaveData nodeSaveData)
+
+        private static void ConnectLoadedNode(NodeDto nodeDto, BaseNode newNode)
         {
-            var nodeDtos = nodeSaveData.DeserializeNodes().nodeDtos;
-            
-            var nodesDictionary = new Dictionary<NodeDto, BaseNode>();
-
-            var nodesList = new List<BaseNode>();
-            
-            nodeSaveData.Nodes.Clear();
-
-            if (nodeDtos == null)
+            if (nodeDto.outputNodeId != string.Empty && _loadedNodes.TryGetValue(nodeDto.outputNodeId, out var nodeToConnect))
             {
-                return;
+                var edge = newNode.OutputPort.ConnectTo(nodeToConnect.InputPort);
+                GraphViewManager.CurrentGraph.AddElement(edge);
             }
-            
-            foreach (var nodeDto in nodeDtos)
+            else if (_nodesToLoad.TryGetValue(nodeDto.outputNodeId, out var nodeToLoad))
             {
-                switch (nodeDto.typeName)
-                {
-                    case nameof(StartingNode):
-                    {
-                        var newNode = NodeCreator.CreateStartingNode();
-                        
-                        newNode.SetPosition(nodeDto.nodePosition);
-                        newNode.Id = nodeDto.nodeId;
-                        
-                        nodesList.Add(newNode);
-                        nodesDictionary.Add(nodeDto, newNode);
-                        
-                        break;
-                    }
-                    case nameof(DialogueNode):
-                    {
-                        var newNode = NodeCreator.CreateDialogueNode();
-                        
-                        newNode.SetPosition(nodeDto.nodePosition);
-                        newNode.Id = nodeDto.nodeId;
-
-                        newNode.Elements.DialogueLine.value = nodeDto.dialogueElement.dialogueLine;
-                        newNode.Elements.CharacterName.value = nodeDto.dialogueElement.characterName;
-                        
-                        nodesList.Add(newNode);
-                        nodesDictionary.Add(nodeDto, newNode);
-                        
-                        break;
-                    }
-                    case nameof(ChoiceNode):
-                    {
-                        var newNode = NodeCreator.CreateChoiceNode();
-                        
-                        newNode.SetPosition(nodeDto.nodePosition);
-                        newNode.Id = nodeDto.nodeId;
-
-                        newNode.Elements.DialogueLine.value = nodeDto.dialogueElement.dialogueLine;
-                        newNode.Elements.CharacterName.value = nodeDto.dialogueElement.characterName;
-
-
-                        foreach (var choice in nodeDto.choicesData)
-                        {
-                            var newChoice = newNode.AddChoice();
-
-                            newChoice.ChoiceText.value = choice.choiceText;
-                        }
-                        
-                        nodesList.Add(newNode);
-                        nodesDictionary.Add(nodeDto, newNode);
-
-                        break;
-                    }
-                }
-            }
-
-            foreach (var node in nodesList)
-            {
-                
-                
-                switch (node)
-                {
-                    case DialogueNode dialogueNode:
-                    {
-                        //dialogueNode.outputContainer.Children().OfType<Port>().First().Connect();
-                        
-                        break;
-                    }
-                }
+                var connect = LoadNode(nodeToLoad);
+                var edge = newNode.OutputPort.ConnectTo(connect.InputPort);
+                GraphViewManager.CurrentGraph.AddElement(edge);
             }
         }
     }
