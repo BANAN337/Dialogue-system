@@ -150,20 +150,27 @@ namespace Dialogue_System.Scripts.Node_Utility
             
             AddInputNodeIds(node, nodeDto);
 
-            foreach (var data in node.Elements.ChoicesData)
+            foreach (var choiceData in node.Elements.ChoicesData)
             {
-                var connectedNode = (BaseNode)data.OutputPort.connections.First().input.node;
+                var connectedNode = (BaseNode)choiceData.OutputPort.connections.FirstOrDefault()?.input.node;
+                
                 var newChoicesData = new ChoiceDataDto
                 {
-                    outputNodeId = connectedNode.Id,
-                    choiceText = data.ChoiceText.value
+                    choiceText = choiceData.ChoiceText.value
                 };
-                
+
+                if (connectedNode != null)
+                {
+                    newChoicesData.outputNodeId = connectedNode.Id;
+                }
+
                 choicesData.Add(newChoicesData);
             }
+
+            choicesData.Reverse();
             
-            nodeDto.choicesData = choicesData.ToArray();
-            
+            nodeDto.choicesDataDto = choicesData.ToArray();
+
             return nodeDto;
         }
     }

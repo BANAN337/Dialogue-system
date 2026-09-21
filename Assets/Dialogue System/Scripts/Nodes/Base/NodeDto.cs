@@ -21,7 +21,7 @@ namespace Dialogue_System.Scripts.Nodes.Dialogue_Node
         public DialogueElement dialogueElement = new();
         public Rect nodePosition;
         
-        public ChoiceDataDto[] choicesData;
+        public ChoiceDataDto[] choicesDataDto;
         
         public bool nodeCreated;
     }
